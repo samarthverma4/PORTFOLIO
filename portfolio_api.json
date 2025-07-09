@@ -1,0 +1,109 @@
+{
+  "portfolio": {
+    "owner": {
+      "name": "Samarth Verma",
+      "title": "Frontend Developer",
+      "location": "Mathura, UP, India",
+      "email": "rajeevnikky.15@gmail.com",
+      "phone": "+91 82732 85234"
+    },
+    "skills": {
+      "frontend": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "React",
+        "Vue.js",
+        "Angular",
+        "TypeScript",
+        "Sass/SCSS"
+      ],
+      "backend": [
+        "Node.js",
+        "Python",
+        "Express.js",
+        "Django",
+        "Flask",
+        "REST APIs",
+        "GraphQL"
+      ],
+      "database": [
+        "MongoDB",
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "Firebase"
+      ],
+      "tools": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Figma",
+        "Adobe XD",
+        "Webpack",
+        "Vite"
+      ],
+      "cloud": [
+        "AWS",
+        "Azure",
+        "Google Cloud",
+        "Vercel",
+        "Netlify",
+        "Docker"
+      ]
+    },
+    "projects": [
+      {
+        "name": "E-Commerce Platform",
+        "description": "Full-stack e-commerce solution with modern UI/UX",
+        "tech": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "Stripe API"
+        ],
+        "status": "completed"
+      },
+      {
+        "name": "Task Management App",
+        "description": "Collaborative project management tool",
+        "tech": [
+          "Vue.js",
+          "Express.js",
+          "PostgreSQL",
+          "Socket.io"
+        ],
+        "status": "in-progress"
+      },
+      {
+        "name": "Portfolio Website",
+        "description": "Interactive portfolio with advanced animations",
+        "tech": [
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "Canvas API"
+        ],
+        "status": "completed"
+      }
+    ],
+    "statistics": {
+      "experience_years": 5,
+      "projects_completed": 17,
+      "technologies_mastered": 33,
+      "client_satisfaction": 99,
+      "code_commits": 680,
+      "last_updated": "2025-07-09T12:21:33.049557"
+    },
+    "performance": {
+      "load_time": 0.88,
+      "lighthouse_score": 98,
+      "accessibility_score": 94,
+      "seo_score": 89,
+      "performance_score": 95,
+      "bundle_size": "238KB"
+    },
+    "last_updated": "2025-07-09T12:21:33.049557",
+    "version": "2.0.0"
+  }
+}
