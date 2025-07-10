@@ -38,22 +38,9 @@ def check_portfolio_files():
     print("\n🔍 Checking generated content...")
     generated_dir = portfolio_dir / "generated_content"
     if generated_dir.exists():
-        generated_files = [
-            "portfolio_stats.json",
-            "dynamic_variables.css",
-            "dynamic_skills.html",
-            "dynamic_projects.html",
-            "background_particles.json",
-            "performance_metrics.json"
-        ]
-        
-        for file in generated_files:
-            if not (generated_dir / file).exists():
-                issues.append(f"❌ Missing generated file: {file}")
-            else:
-                print(f"✅ Generated: {file}")
+        print("Generated content directory exists.")
     else:
-        issues.append("❌ Missing generated_content directory")
+        print("No generated content directory found.")
     
     # Check JSON validity
     print("\n🔍 Checking JSON files...")

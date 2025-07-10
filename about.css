@@ -53,11 +53,12 @@ body, .dark-about {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 32px 48px 0 48px;
+  padding: 32px 32px 0 48px;
   font-size: 13px;
   letter-spacing: 1px;
   color: #e0e0e0;
   opacity: 0.85;
+  box-sizing: border-box;
 }
 .about-nav-left span {
   margin-right: 32px;
@@ -69,10 +70,14 @@ body, .dark-about {
 }
 .about-nav-right {
   display: flex;
-  align-items: center;
-  gap: 32px;
-  flex-shrink: 0;
+  align-items: flex-end;
+  gap: 16px;
+  flex-shrink: 1;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  min-width: 0;
+  max-width: 45%;
+  flex-direction: column;
 }
 .about-footer-right {
   min-width: 120px;
@@ -82,10 +87,13 @@ body, .dark-about {
   justify-content: flex-end;
 }
 .about-nav-desc {
-  max-width: 340px;
+  max-width: 100%;
   font-size: 12px;
   color: #bdbdbd;
   line-height: 1.5;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .about-newsletter {
   background: none;
@@ -97,6 +105,12 @@ body, .dark-about {
   cursor: pointer;
   letter-spacing: 1px;
   transition: border 0.2s, color 0.2s;
+  min-width: fit-content;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin-top: 8px;
+  text-align: center;
+  align-self: flex-end;
 }
 .about-newsletter:hover {
   border: 1px solid #fff;
@@ -159,46 +173,70 @@ body, .dark-about {
 .about-footer {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 48px 24px 48px;
+  padding: 0 32px 24px 32px;
   font-size: 12px;
   color: #bdbdbd;
   opacity: 0.7;
   letter-spacing: 1px;
-}
-.about-footer-center {
-  text-align: center;
-  flex: 1;
+  box-sizing: border-box;
 }
 .about-footer-left, .about-footer-right {
-  min-width: 120px;
+  min-width: 100px;
+  flex-shrink: 1;
+  word-break: break-word;
+  white-space: normal;
 }
-
-/* Slider bar styles removed - no longer needed */
-
+.about-footer-right {
+  text-align: right;
+}
 @media (max-width: 900px) {
   .about-nav, .about-footer {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .about-center-grid {
     gap: 16px 24px;
   }
+  .about-nav-right {
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .about-newsletter {
+    font-size: 11px;
+    padding: 5px 10px;
+    margin-left: 4px;
+  }
 }
 @media (max-width: 600px) {
   .about-nav, .about-footer {
-    padding-left: 6px;
-    padding-right: 6px;
-    font-size: 11px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 10px;
   }
-  .about-center-grid {
-    min-width: 0;
-    gap: 8px 8px;
+  .about-nav-right {
+    flex-direction: column;
+    align-items: flex-start; /* Move children to the left */
+    gap: 4px;
+    max-width: 100%;
   }
-  .about-photo {
-    width: 80px;
-    height: 80px;
+  .about-newsletter {
+    width: 100%;
+    max-width: 100%;
+    font-size: 10px;
+    padding: 7px 0;
+    margin-left: 0;
+    margin-top: 6px;
+    align-self: stretch;
+    text-align: left; /* Button text to the left */
+  }
+  .about-nav-desc {
+    max-width: 100%;
+    word-break: break-word;
+    text-align: left; /* Description to the left */
   }
 }
 /* Animation utility for JS-driven about page animation */
