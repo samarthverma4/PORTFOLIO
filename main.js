@@ -1,36 +1,38 @@
-// Cover click transition with previous animation
-const cover = document.getElementById('cover');
-const mainContent = document.getElementById('mainContent');
+// Portfolio initialization function for Barba.js compatibility
+function initPortfolio() {
+  // Cover click transition with previous animation
+  const cover = document.getElementById('cover');
+  const mainContent = document.getElementById('mainContent');
 
-// Animated morph for cover card (expands from center, title always centered)
-if (cover) {
-  cover.addEventListener('click', function handleCoverClick(e) {
-    if (cover.classList.contains('anim-rect') || cover.classList.contains('anim-expand')) return;
-    cover.classList.add('anim-overflow');
-    // Step 1: Morph to horizontal rectangle
-    cover.classList.add('anim-rect');
-    // Step 2: After width/height transition, round corners
-    setTimeout(() => {
-      cover.classList.add('anim-rounded');
-      // Step 3: After border-radius, expand to fullscreen from center
+  // Animated morph for cover card (expands from center, title always centered)
+  if (cover) {
+    cover.addEventListener('click', function handleCoverClick(e) {
+      if (cover.classList.contains('anim-rect') || cover.classList.contains('anim-expand')) return;
+      cover.classList.add('anim-overflow');
+      // Step 1: Morph to horizontal rectangle
+      cover.classList.add('anim-rect');
+      // Step 2: After width/height transition, round corners
       setTimeout(() => {
-        cover.classList.add('anim-expand');
-        // Step 4: After expand, fade out cover and fade in welcome
+        cover.classList.add('anim-rounded');
+        // Step 3: After border-radius, expand to fullscreen from center
         setTimeout(() => {
-          cover.classList.add('anim-fadeout');
-          const welcome = document.getElementById('welcome');
-          if (welcome) welcome.classList.add('visible');
-          // After fade, hide cover and show main content
+          cover.classList.add('anim-expand');
+          // Step 4: After expand, fade out cover and fade in welcome
           setTimeout(() => {
-            cover.style.display = 'none';
-            mainContent.classList.add('visible');
-            setTimeout(showBookFlip, 800);
-          }, 600);
-        }, 800);
-      }, 500);
-    }, 600);
-  });
-}
+            cover.classList.add('anim-fadeout');
+            const welcome = document.getElementById('welcome');
+            if (welcome) welcome.classList.add('visible');
+            // After fade, hide cover and show main content
+            setTimeout(() => {
+              cover.style.display = 'none';
+              mainContent.classList.add('visible');
+              setTimeout(showBookFlip, 800);
+            }, 600);
+          }, 800);
+        }, 500);
+      }, 600);
+    });
+  }
 
 let aboutPageAnimated = false;
 
@@ -185,4 +187,26 @@ function animateAboutPage() {
       }, 180);
     }, i * 40);
   });
+
+  // Barba.js navigation helpers
+  function navigateToPage(page) {
+    // Trigger Barba.js page transition
+    if (typeof barba !== 'undefined') {
+      barba.go(page);
+    }
+  }
+
+  // Add event listeners for navigation
+  document.querySelectorAll('[data-barba]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (href) {
+        navigateToPage(href);
+      }
+    });
+  });
 }
+
+// Initialize portfolio on first load
+document.addEventListener('DOMContentLoaded', initPortfolio);

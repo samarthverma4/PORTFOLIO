@@ -7,8 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="about.css">
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
-<body>
+<body data-barba="wrapper">
+  <div data-barba="container" data-barba-namespace="home">
   <div class="cover-container" id="cover">
     <div class="cover-content">
       <div class="cover-title">
@@ -31,9 +34,9 @@
         <div class="dark-about">
           <nav class="about-nav">
             <div class="about-nav-left">
-              <span>WORK (12)</span>
-              <span>ABOUT</span>
-              <span>ARTWORKS</span>
+              <span data-barba-prevent="self" onclick="showBookPage(2)">WORK (12)</span>
+              <span data-barba-prevent="self" onclick="showBookPage(1)">ABOUT</span>
+              <span data-barba-prevent="self" onclick="showBookPage(3)">ARTWORKS</span>
             </div>
             <div class="about-nav-right">
               <span class="about-nav-desc">
@@ -94,5 +97,57 @@
     </div>
   </div>
   <script src="main.js"></script>
+  <script>
+    // Initialize Barba.js
+    barba.init({
+      transitions: [{
+        name: 'fade-transition',
+        leave(data) {
+          return gsap.to(data.current.container, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out"
+          });
+        },
+        enter(data) {
+          return gsap.fromTo(data.next.container, 
+            { opacity: 0 },
+            { 
+              opacity: 1, 
+              duration: 0.5,
+              ease: "power2.out" 
+            }
+          );
+        }
+      }, {
+        name: 'slide-transition',
+        leave(data) {
+          return gsap.to(data.current.container, {
+            x: '-100%',
+            duration: 0.6,
+            ease: "power2.inOut"
+          });
+        },
+        enter(data) {
+          return gsap.fromTo(data.next.container,
+            { x: '100%' },
+            { 
+              x: '0%',
+              duration: 0.6,
+              ease: "power2.inOut"
+            }
+          );
+        }
+      }]
+    });
+
+    // Reinitialize functionality after page transition
+    barba.hooks.after(() => {
+      // Reinitialize main.js functionality if needed
+      if (typeof initPortfolio === 'function') {
+        initPortfolio();
+      }
+    });
+  </script>
 </body>
 </html>
