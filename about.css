@@ -48,35 +48,6 @@ body, .dark-about {
   box-sizing: border-box;
 }
 
-/* Background animation canvas */
-.background-animation-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.7;
-}
-
-/* Ensure content is above animation */
-.about-nav,
-.about-center,
-.about-footer {
-  position: relative;
-  z-index: 2;
-}
-
-/* Add subtle backdrop for better text readability */
-.about-nav,
-.about-footer {
-  background: rgba(16, 16, 16, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* Enhanced photo glow effect that interacts with animation */
 .about-photo {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
@@ -84,56 +55,11 @@ body, .dark-about {
   height: clamp(80px, 20vw, 120px);
   border-radius: clamp(8px, 2vw, 12px);
   overflow: hidden;
-  box-shadow: 
-    0 4px 32px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(255, 179, 71, 0.2);
+  box-shadow: 0 4px 32px #0008;
   background: #222;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  z-index: 3;
-  transition: box-shadow 0.3s ease;
-}
-
-.about-photo:hover {
-  box-shadow: 
-    0 8px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 179, 71, 0.4);
-}
-
-/* Performance optimizations for animation */
-.dark-about * {
-  will-change: auto;
-}
-
-.background-animation-canvas {
-  will-change: transform;
-}
-
-/* Reduce animation on low-end devices */
-@media (prefers-reduced-motion: reduce) {
-  .background-animation-canvas {
-    display: none;
-  }
-}
-
-/* Optimize animation for different screen sizes */
-@media (max-width: 768px) {
-  .background-animation-canvas {
-    opacity: 0.5;
-  }
-  
-  .about-nav,
-  .about-footer {
-    background: rgba(16, 16, 16, 0.5);
-  }
-}
-
-@media (max-width: 480px) {
-  .background-animation-canvas {
-    opacity: 0.3;
-  }
 }
 
 @media (max-width: 900px) {
