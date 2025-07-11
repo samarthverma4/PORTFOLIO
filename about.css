@@ -44,6 +44,8 @@ body, .dark-about {
   position: relative;
   z-index: 1;
   overflow: hidden;
+  padding: 0;
+  box-sizing: border-box;
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -105,7 +107,7 @@ body, .dark-about {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 .particle {
   position: absolute;
@@ -114,6 +116,8 @@ body, .dark-about {
   background: rgba(255, 179, 71, 0.3);
   border-radius: 50%;
   animation: float 8s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 1;
 }
 .particle:nth-child(2n) {
   background: rgba(255, 94, 98, 0.3);
@@ -151,6 +155,8 @@ body, .dark-about {
   letter-spacing: 1px;
   color: #e0e0e0;
   opacity: 0.85;
+  position: relative;
+  z-index: 10;
 }
 .about-nav-left span {
   margin-right: 32px;
@@ -202,6 +208,8 @@ body, .dark-about {
   justify-content: center;
   min-height: 0;
   padding: 20px;
+  position: relative;
+  z-index: 10;
 }
 .about-center-grid {
   display: grid;
@@ -212,6 +220,8 @@ body, .dark-about {
   justify-items: center;
   min-width: unset;
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
 }
 .about-role {
   font-size: 13px;
@@ -242,6 +252,8 @@ body, .dark-about {
   align-items: center;
   justify-content: center;
   animation: breathe 4s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
 }
 .about-photo img {
   width: 100%;
@@ -260,6 +272,8 @@ body, .dark-about {
   color: #bdbdbd;
   opacity: 0.7;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 10;
 }
 .about-footer-center {
   text-align: center;
