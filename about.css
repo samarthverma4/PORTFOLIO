@@ -44,117 +44,255 @@ body, .dark-about {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  padding: 0;
-  box-sizing: border-box;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
-
+.dark-about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 179, 71, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 94, 98, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 179, 71, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 179, 71, 0.02) 0%, transparent 30%);
+  animation: backgroundShift 20s ease-in-out infinite;
+  z-index: -2;
+  transition: background 0.3s ease;
+}
+.dark-about::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 0%, rgba(255, 179, 71, 0.01) 25%, transparent 50%, rgba(255, 94, 98, 0.01) 75%, transparent 100%);
+  animation: gradientMove 15s linear infinite;
+  z-index: -1;
+}
+@keyframes backgroundShift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(-10px, -5px) scale(1.05);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(10px, 5px) scale(0.95);
+    opacity: 0.7;
+  }
+}
+@keyframes gradientMove {
+  0% {
+    transform: translateX(-100%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(360deg);
+  }
+}
+/* Floating particles animation */
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 179, 71, 0.3);
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
+.particle:nth-child(2n) {
+  background: rgba(255, 94, 98, 0.3);
+  animation-duration: 10s;
+  animation-delay: -2s;
+}
+.particle:nth-child(3n) {
+  background: rgba(245, 245, 245, 0.1);
+  animation-duration: 12s;
+  animation-delay: -4s;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(50px) scale(1.1);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 1;
+  }
+}
+.about-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 32px 48px 0 48px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #e0e0e0;
+  opacity: 0.85;
+}
+.about-nav-left span {
+  margin-right: 32px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.about-nav-left span:hover {
+  color: #fff;
+}
+.about-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+  justify-content: flex-end;
+}
+.about-footer-right {
+  min-width: 120px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.about-nav-desc {
+  max-width: 340px;
+  font-size: 12px;
+  color: #bdbdbd;
+  line-height: 1.5;
+}
+.about-newsletter {
+  background: none;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  padding: 6px 18px;
+  border-radius: 18px;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: border 0.2s, color 0.2s;
+}
+.about-newsletter:hover {
+  border: 1px solid #fff;
+  color: #fff;
+}
+.about-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 20px;
+}
+.about-center-grid {
+  display: grid;
+  grid-template-columns: 140px 140px 140px;
+  grid-template-rows: 40px 140px 40px;
+  gap: 0 0;
+  align-items: center;
+  justify-items: center;
+  min-width: unset;
+  margin: 0 auto;
+}
+.about-role {
+  font-size: 13px;
+  color: #bdbdbd;
+  text-align: center;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.about-role.designer {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+.about-role.code {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
 .about-photo {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  width: clamp(80px, 20vw, 120px);
-  height: clamp(80px, 20vw, 120px);
-  border-radius: clamp(8px, 2vw, 12px);
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 32px #0008;
   background: #222;
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: breathe 4s ease-in-out infinite;
 }
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(1.1);
+}
+.about-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 48px 24px 48px;
+  font-size: 12px;
+  color: #bdbdbd;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+.about-footer-center {
+  text-align: center;
+  flex: 1;
+}
+.about-footer-left, .about-footer-right {
+  min-width: 120px;
+}
+
+/* Slider bar styles removed - no longer needed */
 
 @media (max-width: 900px) {
   .about-nav, .about-footer {
-    padding-left: clamp(8px, 2vw, 16px);
-    padding-right: clamp(8px, 2vw, 16px);
+    padding-left: 18px;
+    padding-right: 18px;
   }
   .about-center-grid {
-    grid-template-columns: repeat(3, clamp(90px, 18vw, 130px));
-    gap: clamp(6px, 1.5vw, 12px) clamp(3px, 0.8vw, 6px);
-  }
-  .about-nav-right {
-    max-width: 50%;
-  }
-  .about-nav-left {
-    gap: clamp(8px, 2vw, 16px);
+    gap: 16px 24px;
   }
 }
 @media (max-width: 600px) {
-  .about-nav {
-    flex-direction: column;
-    gap: clamp(8px, 2vw, 16px);
-    align-items: stretch;
-  }
-  .about-nav-left {
-    justify-content: center;
-    gap: clamp(8px, 2vw, 16px);
-  }
-  .about-nav-right {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 100%;
-    gap: clamp(6px, 1.5vw, 12px);
-  }
-  .about-nav-desc {
-    text-align: center;
-    max-width: 100%;
-  }
-  .about-newsletter {
-    align-self: center;
-    margin-top: clamp(4px, 1vw, 8px);
+  .about-nav, .about-footer {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 11px;
   }
   .about-center-grid {
-    grid-template-columns: repeat(3, clamp(80px, 15vw, 100px));
-    gap: clamp(4px, 1vw, 8px);
-  }
-  .about-footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: clamp(4px, 1vw, 8px);
-    padding-bottom: clamp(8px, 2vw, 16px);
-  }
-  .about-footer-left, .about-footer-right {
-    text-align: center;
     min-width: 0;
-  }
-  .about-footer-center {
-    margin: clamp(2px, 0.5vw, 4px) 0;
-  }
-}
-@media (max-width: 400px) {
-  .about-nav {
-    padding: clamp(8px, 2vw, 16px) clamp(8px, 2vw, 16px) 0;
-  }
-  .about-center-grid {
-    grid-template-columns: repeat(3, clamp(70px, 18vw, 90px));
-    grid-template-rows: clamp(25px, 6vw, 35px) clamp(70px, 18vw, 90px) clamp(25px, 6vw, 35px);
-  }
-  .about-role {
-    font-size: clamp(8px, 2vw, 10px);
-    letter-spacing: 1px;
+    gap: 8px 8px;
   }
   .about-photo {
-    width: clamp(60px, 15vw, 80px);
-    height: clamp(60px, 15vw, 80px);
-  }
-  .about-footer {
-    padding: 0 clamp(8px, 2vw, 16px) clamp(8px, 2vw, 16px);
-  }
-}
-@media (max-width: 320px) {
-  .about-center-grid {
-    grid-template-columns: repeat(3, clamp(60px, 16vw, 80px));
-    grid-template-rows: clamp(20px, 5vw, 30px) clamp(60px, 16vw, 80px) clamp(20px, 5vw, 30px);
-  }
-  .about-photo {
-    width: clamp(50px, 12vw, 70px);
-    height: clamp(50px, 12vw, 70px);
-  }
-  .about-nav-left {
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(4px, 1vw, 8px);
+    width: 80px;
+    height: 80px;
   }
 }
 /* Animation utility for JS-driven about page animation */
@@ -168,15 +306,10 @@ body, .dark-about {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
-  padding: clamp(2px, 0.5vw, 4px);
-  border-radius: 4px;
-  -webkit-tap-highlight-color: transparent;
 }
-.about-social-link:hover,
-.about-social-link:focus {
+.about-social-link:hover {
   color: #ff5e62;
   text-decoration: underline;
-  background: rgba(255, 94, 98, 0.1);
 }
 .swarm-canvas {
   position: fixed;
@@ -186,4 +319,115 @@ body, .dark-about {
   z-index: 99999;
   pointer-events: none;
   background: transparent;
+}
+
+/* Enhanced mouse interaction effects */
+.dark-about {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.dark-about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 179, 71, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 94, 98, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 179, 71, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 179, 71, 0.02) 0%, transparent 30%);
+  animation: backgroundShift 20s ease-in-out infinite;
+  z-index: -2;
+  transition: background 0.3s ease;
+}
+
+/* Pulse animation for interactive elements */
+.about-newsletter,
+.about-social-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-newsletter::before,
+.about-social-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 179, 71, 0.1) 0%, transparent 70%);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.about-newsletter:hover::before,
+.about-social-link:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+/* Breathing animation for photo */
+.about-photo {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 32px #0008;
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 6px 40px rgba(255, 179, 71, 0.1), 0 4px 32px #0008;
+  }
+}
+
+/* Subtle text glow on hover */
+.about-role:hover {
+  color: #e0e0e0;
+  text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Enhanced floating particles with different sizes */
+.particle.large {
+  width: 3px;
+  height: 3px;
+  animation-duration: 15s;
+}
+
+.particle.small {
+  width: 1px;
+  height: 1px;
+  animation-duration: 6s;
+}
+
+/* Responsive adjustments for animations */
+@media (max-width: 768px) {
+  .dark-about::before,
+  .dark-about::after {
+    animation-duration: 25s;
+  }
+  
+  .particle {
+    animation-duration: 10s;
+  }
+  
+  .about-photo {
+    animation: breathe 6s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dark-about::before,
+  .dark-about::after,
+  .particle,
+  .about-photo {
+    animation: none;
+  }
 }
