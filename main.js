@@ -336,5 +336,7 @@ window.showBookPage = function(pageIndex) {
   }
 }
 
+}
+
 // Initialize portfolio on first load
 document.addEventListener('DOMContentLoaded', initPortfolio);
