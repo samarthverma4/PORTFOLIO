@@ -39,29 +39,64 @@ let aboutPageAnimated = false;
 function showBookFlip() {
   const welcome = document.getElementById('welcome');
   const book = document.getElementById('bookFlip');
-  // Fade out welcome
-  welcome.style.transition = "opacity 0.7s";
-  welcome.style.opacity = 0;
-  // Fade in book with slight overlap
-  setTimeout(() => {
-    book.style.display = "flex";
-    book.style.opacity = "0";
-    book.style.transition = "opacity 0.8s cubic-bezier(.77,0,.18,1)";
+  
+  // Use GSAP for smoother transitions
+  if (typeof gsap !== 'undefined') {
+    // Fade out welcome with GSAP
+    gsap.to(welcome, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+    
+    // Show and animate book
     setTimeout(() => {
-      book.style.opacity = "1";
-      // Animate about page only after book is fully visible, and only once
-      setTimeout(() => {
-        if (pages[0].classList.contains('active') && !aboutPageAnimated) {
-          animateAboutPage();
-          aboutPageAnimated = true;
+      book.style.display = "flex";
+      gsap.fromTo(book, 
+        { opacity: 0, scale: 0.95 },
+        { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          onComplete: () => {
+            // Animate about page after book is visible
+            if (pages[0].classList.contains('active') && !aboutPageAnimated) {
+              setTimeout(() => {
+                animateAboutPage();
+                aboutPageAnimated = true;
+              }, 300);
+            }
+            // Hide welcome after animation
+            setTimeout(() => {
+              welcome.style.display = "none";
+            }, 200);
+          }
         }
-        // Hide welcome after book is visible
+      );
+    }, 200);
+  } else {
+    // Fallback for if GSAP isn't loaded
+    welcome.style.transition = "opacity 0.7s";
+    welcome.style.opacity = 0;
+    setTimeout(() => {
+      book.style.display = "flex";
+      book.style.opacity = "0";
+      book.style.transition = "opacity 0.8s cubic-bezier(.77,0,.18,1)";
+      setTimeout(() => {
+        book.style.opacity = "1";
+        if (pages[0].classList.contains('active') && !aboutPageAnimated) {
+          setTimeout(() => {
+            animateAboutPage();
+            aboutPageAnimated = true;
+          }, 800);
+        }
         setTimeout(() => {
           welcome.style.display = "none";
         }, 200);
-      }, 800); // match book fade duration
-    }, 100); // slight overlap for smoothness
-  }, 400); // start book fade in before welcome is fully gone
+      }, 100);
+    }, 400);
+  }
 }
 const pages = [
   document.getElementById('page1'),
@@ -73,25 +108,93 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 let current = 0;
 function updatePages() {
-  pages.forEach((page, i) => {
-    page.classList.remove('left', 'active', 'right');
-    if (i < current) page.classList.add('left');
-    else if (i === current) page.classList.add('active');
-    else page.classList.add('right');
-  });
-  prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === pages.length - 1;
+  // Add Barba.js-style transition to page changes
+  const currentPage = pages.find(p => p.classList.contains('active'));
+  
+  // Leave animation for current page
+  if (currentPage && typeof gsap !== 'undefined') {
+    gsap.to(currentPage, {
+      opacity: 0,
+      x: '-30px',
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  }
+  
+  setTimeout(() => {
+    pages.forEach((page, i) => {
+      page.classList.remove('left', 'active', 'right');
+      if (i < current) page.classList.add('left');
+      else if (i === current) page.classList.add('active');
+      else page.classList.add('right');
+    });
+    
+    // Enter animation for new page
+    const newPage = pages[current];
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(newPage, 
+        { opacity: 0, x: '30px' },
+        { 
+          opacity: 1, 
+          x: '0px',
+          duration: 0.3,
+          ease: "power2.out"
+        }
+      );
+    }
+    
+    // Special animation for about page
+    if (current === 0 && !aboutPageAnimated) {
+      setTimeout(() => {
+        animateAboutPage();
+        aboutPageAnimated = true;
+      }, 150);
+    }
+    
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === pages.length - 1;
+  }, 150);
 }
 prevBtn.addEventListener('click', () => {
   if (current > 0) {
-    current--;
-    updatePages();
+    // Add slide transition effect
+    const currentPage = pages.find(p => p.classList.contains('active'));
+    if (currentPage && typeof gsap !== 'undefined') {
+      gsap.to(currentPage, {
+        opacity: 0,
+        x: '50px',
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          current--;
+          updatePages();
+        }
+      });
+    } else {
+      current--;
+      updatePages();
+    }
   }
 });
 nextBtn.addEventListener('click', () => {
   if (current < pages.length - 1) {
-    current++;
-    updatePages();
+    // Add slide transition effect
+    const currentPage = pages.find(p => p.classList.contains('active'));
+    if (currentPage && typeof gsap !== 'undefined') {
+      gsap.to(currentPage, {
+        opacity: 0,
+        x: '-50px',
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          current++;
+          updatePages();
+        }
+      });
+    } else {
+      current++;
+      updatePages();
+    }
   }
 });
 document.addEventListener('keydown', e => {
@@ -206,6 +309,31 @@ function animateAboutPage() {
       }
     });
   });
+}
+
+// Navigation function for book pages
+window.showBookPage = function(pageIndex) {
+  const targetIndex = pageIndex - 1; // Convert to 0-based index
+  if (targetIndex >= 0 && targetIndex < pages.length && targetIndex !== current) {
+    // Add transition effect
+    const currentPage = pages.find(p => p.classList.contains('active'));
+    
+    if (currentPage && typeof gsap !== 'undefined') {
+      gsap.to(currentPage, {
+        opacity: 0,
+        rotateY: -15,
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: () => {
+          current = targetIndex;
+          updatePages();
+        }
+      });
+    } else {
+      current = targetIndex;
+      updatePages();
+    }
+  }
 }
 
 // Initialize portfolio on first load
