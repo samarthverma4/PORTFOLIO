@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Samarth Verma - Full Stack Developer Portfolio. Showcasing modern web applications built with React, Node.js, and cutting-edge technologies.">
+  <meta name="keywords" content="portfolio, web developer, full stack, react, nodejs, javascript, frontend, backend">
+  <meta name="author" content="Samarth Verma">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://samarthverma.dev/">
+  <meta property="og:title" content="Samarth Verma | Full Stack Developer Portfolio">
+  <meta property="og:description" content="Full Stack Developer specializing in modern web technologies. View my projects and get in touch!">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://samarthverma.dev/">
+  <meta property="twitter:title" content="Samarth Verma | Full Stack Developer Portfolio">
+  <meta property="twitter:description" content="Full Stack Developer specializing in modern web technologies. View my projects and get in touch!">
+  
+  <title>Samarth Verma | Portfolio</title>
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-logo">SV</div>
+      <div class="loading-progress">
+        <div class="loading-bar" id="loadingBar"></div>
+      </div>
+      <div class="loading-text">Loading Portfolio...</div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="main-nav hidden" id="mainNav">
+    <div class="nav-logo">
+      <span>SV</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" data-page="0">Home</a>
+      <a href="#about" data-page="1">About</a>
+      <a href="#projects" data-page="2">Projects</a>
+      <a href="#skills" data-page="3">Skills</a>
+      <a href="#contact" data-page="4">Contact</a>
+    </div>
+    <div class="nav-toggle" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Cover Screen -->
+  <div class="cover-container" id="cover">
+    <div class="cover-content">
+      <div class="cover-title">
+        <span class="cover-title-line">PORT-</span>
+        <span class="cover-title-line">FOLIO</span>
+      </div>
+      <div class="cover-subtitle">
+        <span class="typing-text"></span>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <span>Samarth Verma</span>
+      <span>Selected Works</span>
+      <span>2025</span>
+      <span>Full Stack</span>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+      <span>Click to Enter</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <div id="welcome">Welcome to my portfolio!</div>
+    
+    <!-- Book Flip Container -->
+    <div class="book-flip" id="bookFlip">
+      <!-- Page 0: Hidden Left Page -->
+      <div class="book-page left" id="page0"></div>
+      
+      <!-- Page 1: About/Home -->
+      <div class="book-page active" id="page1">
+        <div class="dark-about">
+          <nav class="about-nav">
+            <div class="about-nav-left">
+              <span data-filter="all">WORK (<span class="project-count">5</span>)</span>
+              <span>ABOUT</span>
+              <span>ARTWORKS</span>
+            </div>
+            <div class="about-nav-right">
+              <span class="about-nav-desc">
+                Full Stack Developer based in India. Passionate about creating exceptional digital experiences using modern technologies and best practices.
+              </span>
+              <button class="about-newsletter" onclick="openContactForm()">GET IN TOUCH</button>
+            </div>
+          </nav>
+          <main class="about-center">
+            <div class="about-center-grid">
+              <span class="about-role">FULL STACK<br>DEVELOPER<br>[REACT/NODE]</span>
+              <div class="about-photo">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Samarth Verma Profile">
+              </div>
+              <span class="about-role">UI/UX ENTHUSIAST</span>
+              <span class="about-role designer">CREATIVE CODER</span>
+              <span class="about-role code">[OPEN FOR WORK]</span>
+            </div>
+          </main>
+          <footer class="about-footer">
+            <div class="about-footer-left">
+              CONNECT:
+              <a href="https://www.instagram.com/samarthvermaaaa?igsh=MWN2enl1eTI3bTR3NA==" target="_blank" rel="noopener" class="about-social-link">IG</a>,
+              <a href="http://www.linkedin.com/in/sam444" target="_blank" rel="noopener" class="about-social-link">LI</a>,
+              <a href="https://github.com/samarthverma" target="_blank" rel="noopener" class="about-social-link">GH</a>
+            </div>
+            <div class="about-footer-center">BE CREATIVE</div>
+            <div class="about-footer-center">BE DIFFERENT</div>
+            <div class="about-footer-right">©2025 INDIA</div>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- Page 2: Projects -->
+      <div class="book-page right" id="page2">
+        <div class="page-content projects-page">
+          <div class="page-header">
+            <h2 class="page-title">Featured Projects</h2>
+            <div class="projects-filter">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="web">Web</button>
+              <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+              <button class="filter-btn" data-filter="ai">AI/ML</button>
+            </div>
+          </div>
+          <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Page 3: Skills -->
+      <div class="book-page right" id="page3">
+        <div class="page-content skills-page">
+          <div class="page-header">
+            <h2 class="page-title">Technical Skills</h2>
+            <div class="skills-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-count="8">0</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-count="25">0</span>
+                <span class="stat-label">Technologies</span>
+              </div>
+            </div>
+          </div>
+          <div class="skills-container" id="skillsContainer">
+            <!-- Skills will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Page 4: Contact -->
+      <div class="book-page right" id="page4">
+        <div class="page-content contact-page">
+          <div class="page-header">
+            <h2 class="page-title">Let's Connect</h2>
+            <p class="contact-subtitle">Ready to bring your ideas to life? Let's talk!</p>
+          </div>
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div class="contact-details">
+                  <h4>Email</h4>
+                  <a href="mailto:rajeevnikky.15@gmail.com">rajeevnikky.15@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-details">
+                  <h4>Phone</h4>
+                  <a href="tel:+918273285234">+91 82732 85234</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-details">
+                  <h4>Location</h4>
+                  <span>Mathura, UP, India</span>
+                </div>
+              </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <input type="text" id="name" name="name" required>
+                <label for="name">Your Name</label>
+              </div>
+              <div class="form-group">
+                <input type="email" id="email" name="email" required>
+                <label for="email">Your Email</label>
+              </div>
+              <div class="form-group">
+                <input type="text" id="subject" name="subject" required>
+                <label for="subject">Subject</label>
+              </div>
+              <div class="form-group">
+                <textarea id="message" name="message" required rows="4"></textarea>
+                <label for="message">Your Message</label>
+              </div>
+              <button type="submit" class="submit-btn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loader hidden">Sending...</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Book Controls -->
+      <div class="book-controls">
+        <button class="book-btn" id="prevBtn" aria-label="Previous page">&#8592;</button>
+        <div class="page-indicator">
+          <span class="current-page">1</span> / <span class="total-pages">4</span>
+        </div>
+        <button class="book-btn" id="nextBtn" aria-label="Next page">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="modal-overlay hidden" id="projectModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Project details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/gsap-animations.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="main.js"></script>
+  <script src="about.js"></script>
+</body>
+</html>
